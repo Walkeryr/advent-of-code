@@ -26,9 +26,16 @@ func main() {
 	fmt.Fprintf(os.Stdout, "Sum of the fuel requirements: %d\n", SumFuelRequirements(masses))
 }
 
-// CalcFuelRequirement - calculate the fuel required to launch given module mass
+// CalcFuelRequirement - calculate the total fuel required to launch given module together with all fuel
+// that would be used during travel.
 func CalcFuelRequirement(mass int) int {
-	return int(math.Floor(float64(mass) / 3.0) - 2)
+	requiredFuel := int(math.Floor(float64(mass) / 3.0) - 2)
+
+	if (requiredFuel <= 0) {
+		return 0
+	}
+
+	return requiredFuel + CalcFuelRequirement(requiredFuel)
 }
 
 // SumFuelRequirements - calculate resulting sum of all fuel requirements

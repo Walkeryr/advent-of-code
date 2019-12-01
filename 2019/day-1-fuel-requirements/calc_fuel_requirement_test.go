@@ -28,20 +28,20 @@ func TestCalcFuelRequirements(t *testing.T) {
 	t.Run("Test case 3", func(t *testing.T) {
 		mass := 1969
 
-		checkRequirements(t, mass, 654)
+		checkRequirements(t, mass, 966)
 	})
 
 	t.Run("Test case 4", func(t *testing.T) {
 		mass := 100756
 
-		checkRequirements(t, mass, 33583)
+		checkRequirements(t, mass, 50346)
 	})
 }
 
 // TODO: mock CalcFuelRequirement function and test only main functionality
 // of the function SumFuelRequirements.
 func TestSumFuelRequirements(t *testing.T) {
-	want := 658
+	want := 970
 	got := SumFuelRequirements([]int{12, 14, 1969})
 
 	if got != want {
