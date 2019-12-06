@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestCalcFuelRequirements(t *testing.T) {
+func TestIntCode(t *testing.T) {
 	checkRequirements := func(t *testing.T, program []int, want []int) {
 		t.Helper()
 
