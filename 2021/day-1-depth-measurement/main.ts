@@ -1,23 +1,12 @@
 import { promises as fs } from "fs";
 import { join } from "path";
+import { measureSimpleIncreases, measureSlidingWindowIncreases } from "./depthMeasurement";
 
 async function loadInput(inputPath: string): Promise<number[]> {
   const rawInput = await fs.readFile(inputPath, "utf8");
   const input = rawInput.split("\n").map((item) => Number(item));
 
   return input;
-}
-
-function measureDepthIncreases(depths: number[]): number {
-  let depthIncreases = 0;
-
-  for (let i = 1; i < depths.length; i++) {
-    if (depths[i] > depths[i - 1]) {
-      depthIncreases += 1;
-    }
-  }
-
-  return depthIncreases;
 }
 
 async function main() {
@@ -31,9 +20,11 @@ async function main() {
     process.exit(1);
   }
 
-  const depthIncreases = measureDepthIncreases(depthsData);
+  const simpleIncreases = measureSimpleIncreases(depthsData);
+  console.log("Number of depth increases", simpleIncreases);
 
-  console.log("Number of depth increases", depthIncreases);
+  const slidingWindowIncreases = measureSlidingWindowIncreases(depthsData);
+  console.log("Number of depth increases (sliding window)", slidingWindowIncreases);
 }
 
 main();
